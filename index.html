@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ivy & Oak | Engagement & Ring Ceremony Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#241521;
+    --plum-soft:#2f1d2b;
+    --blush:#f3e4e6;
+    --blush-dim:#cbb3b8;
+    --rose:#c98a95;
+    --rose-bright:#e3aab3;
+    --champagne:#cbab7d;
+    --line:rgba(243,228,230,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--plum);
+    color:var(--blush);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond', serif; font-style:italic;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  /* ---------- Linked-rings motif (signature element) ---------- */
+  .ring-edge{position:relative;}
+  .ring-edge::before,
+  .ring-edge::after{
+    content:"";
+    position:absolute; left:0; right:0; height:20px;
+    background-image:
+      radial-gradient(circle, transparent 5px, var(--champagne) 5.6px, var(--champagne) 6.4px, transparent 7px);
+    background-size: 26px 20px;
+    background-position: 0 center;
+    background-repeat: repeat-x;
+    opacity:0.65;
+    z-index:3;
+  }
+  .ring-edge::before{top:-10px;}
+  .ring-edge::after{bottom:-10px;}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:24px 6%;
+    background:linear-gradient(180deg, rgba(36,21,33,0.92), rgba(36,21,33,0));
+    transition:background .3s;
+  }
+  .logo{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.5rem; letter-spacing:0.5px; font-weight:600;}
+  .logo span{color:var(--champagne); font-style:normal;}
+  nav ul{list-style:none; display:flex; gap:34px;}
+  nav a{font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; color:var(--blush-dim); transition:color .25s;}
+  nav a:hover{color:var(--rose-bright);}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .nav-toggle span{width:24px; height:1px; background:var(--blush);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    height:100vh; min-height:640px;
+    position:relative;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    background:
+      linear-gradient(180deg, rgba(36,21,33,0.35) 0%, rgba(36,21,33,0.6) 60%, var(--plum) 100%),
+      url('https://picsum.photos/seed/ivyoak1/1600/1000') center/cover no-repeat;
+  }
+  .hero-inner{padding:0 6%; max-width:760px;}
+  .hero-eyebrow{
+    color:var(--champagne); letter-spacing:5px; font-size:0.75rem;
+    text-transform:uppercase; margin-bottom:22px; display:flex; align-items:center; justify-content:center; gap:14px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after{content:""; width:34px; height:1px; background:var(--champagne); display:inline-block;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6.5vw, 4.8rem);
+    line-height:1.12; font-weight:500;
+    text-shadow:0 4px 30px rgba(0,0,0,0.4);
+  }
+  .hero h1 em{color:var(--rose-bright);}
+  .hero p{
+    margin:26px auto 0; max-width:480px; color:var(--blush-dim);
+    font-size:1.02rem; line-height:1.8; font-style:normal;
+  }
+  .hero-cta{margin-top:38px; display:flex; gap:18px; flex-wrap:wrap; justify-content:center;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 32px; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;
+    border-radius:1px; transition:all .25s; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-solid{background:var(--champagne); color:var(--plum); font-weight:500;}
+  .btn-solid:hover{background:var(--rose-bright); transform:translateY(-2px);}
+  .btn-outline{border-color:var(--line); color:var(--blush);}
+  .btn-outline:hover{border-color:var(--champagne); color:var(--champagne);}
+
+  /* ---------- Section shells ---------- */
+  section{padding:120px 6%;}
+  .section-head{max-width:640px; margin:0 auto 60px; text-align:center;}
+  .eyebrow{color:var(--champagne); letter-spacing:3px; font-size:0.72rem; text-transform:uppercase; margin-bottom:14px; display:block; font-style:normal;}
+  .section-head h2{font-size:clamp(2rem,4vw,3rem); font-weight:500;}
+  .section-head p{color:var(--blush-dim); margin-top:16px; font-size:1rem; line-height:1.7; font-style:normal;}
+
+  /* ---------- Category filter ---------- */
+  .filters{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:50px;}
+  .filter-btn{
+    padding:10px 22px; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase;
+    border:1px solid var(--line); border-radius:0; background:transparent; color:var(--blush-dim);
+    cursor:pointer; transition:all .25s;
+  }
+  .filter-btn:hover{border-color:var(--champagne); color:var(--champagne);}
+  .filter-btn.active{background:var(--champagne); border-color:var(--champagne); color:var(--plum); font-weight:500;}
+
+  /* ---------- Gallery grid ---------- */
+  .gallery{display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:170px; gap:12px; max-width:1300px; margin:0 auto;}
+  .g-item{position:relative; overflow:hidden; cursor:pointer; background:var(--plum-soft);}
+  .g-item img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease;}
+  .g-item:hover img{transform:scale(1.08);}
+  .g-item .g-tag{
+    position:absolute; bottom:0; left:0; right:0; padding:16px;
+    background:linear-gradient(0deg, rgba(36,21,33,0.9), transparent);
+    font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--champagne); font-style:normal;
+    opacity:0; transform:translateY(8px); transition:all .3s;
+  }
+  .g-item:hover .g-tag{opacity:1; transform:translateY(0);}
+  .g-item.tall{grid-row:span 2;}
+  .g-item.wide{grid-column:span 2;}
+
+  .gallery-note{text-align:center; margin-top:44px; color:var(--blush-dim); font-size:0.9rem; font-style:normal;}
+  .gallery-note a{color:var(--champagne); border-bottom:1px solid var(--champagne); padding-bottom:2px;}
+
+  /* ---------- Video cards ---------- */
+  .g-item.g-video{background:#000;}
+  .g-item.g-video video{width:100%; height:100%; object-fit:cover;}
+  .play-badge{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:56px; height:56px; border-radius:50%;
+    background:rgba(36,21,33,0.55); border:1.5px solid var(--champagne);
+    display:flex; align-items:center; justify-content:center;
+    backdrop-filter:blur(2px); transition:all .25s; z-index:2;
+  }
+  .g-item.g-video:hover .play-badge{background:var(--champagne); border-color:var(--champagne);}
+  .play-badge svg{margin-left:3px;}
+  .video-tag-icon{
+    position:absolute; top:10px; right:10px; z-index:2;
+    background:rgba(36,21,33,0.7); color:var(--champagne);
+    font-size:0.63rem; letter-spacing:1px; text-transform:uppercase;
+    padding:4px 9px; border-radius:0; border:1px solid var(--line); font-style:normal;
+  }
+
+  /* ---------- External link cards ---------- */
+  .g-item.g-external{cursor:pointer;}
+  .g-item.g-external img{filter:brightness(0.75);}
+  .ext-badge{
+    position:absolute; top:10px; right:10px; z-index:2;
+    display:flex; align-items:center; gap:6px;
+    font-size:0.63rem; letter-spacing:1px; text-transform:uppercase;
+    padding:5px 10px; border:1px solid var(--line); background:rgba(36,21,33,0.75); font-style:normal;
+  }
+  .ext-badge.youtube{color:#e78e93;}
+  .ext-badge.instagram{color:#e3aab3;}
+  .g-item.g-external .play-badge{width:50px; height:50px;}
+
+  /* ---------- Reel strip ---------- */
+  .reel-strip{display:flex; gap:16px; overflow-x:auto; padding:10px 6% 24px; scroll-snap-type:x mandatory;}
+  .reel-strip::-webkit-scrollbar{height:6px;}
+  .reel-strip::-webkit-scrollbar-thumb{background:var(--line); border-radius:10px;}
+  .reel-card{position:relative; flex:0 0 220px; height:390px; scroll-snap-align:start; overflow:hidden; cursor:pointer; background:#000;}
+  .reel-card video{width:100%; height:100%; object-fit:cover;}
+  .reel-label{
+    position:absolute; bottom:0; left:0; right:0; padding:14px;
+    background:linear-gradient(0deg, rgba(36,21,33,0.9), transparent);
+    font-size:0.8rem; letter-spacing:1px; font-style:italic;
+  }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{position:fixed; inset:0; background:rgba(15,9,14,0.96); z-index:100; display:none; align-items:center; justify-content:center; padding:5%;}
+  .lightbox.active{display:flex;}
+  .lightbox img{max-height:88vh; max-width:88vw; box-shadow:0 20px 60px rgba(0,0,0,0.6);}
+  .lightbox-close{position:absolute; top:28px; right:5%; font-size:1.6rem; color:var(--blush); cursor:pointer; background:none; border:none; line-height:1;}
+
+  /* ---------- About / signature strip ---------- */
+  .about{background:var(--plum-soft); display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .about-img{position:relative; padding:14px 0;}
+  .about-img img{filter:grayscale(10%) contrast(1.05);}
+  .stat-row{display:flex; gap:40px; margin-top:34px;}
+  .stat h3{font-size:2.2rem; color:var(--champagne); font-weight:600;}
+  .stat span{font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--blush-dim); font-style:normal;}
+  .about-copy p{color:var(--blush-dim); line-height:1.85; font-size:1rem; margin-bottom:18px; font-style:normal;}
+
+  /* ---------- Timeline ---------- */
+  .timeline{max-width:900px; margin:0 auto;}
+  .t-row{display:grid; grid-template-columns:120px 1fr; gap:26px; padding:22px 0; border-top:1px solid var(--line);}
+  .t-row:last-child{border-bottom:1px solid var(--line);}
+  .t-time{color:var(--champagne); font-size:0.85rem; letter-spacing:1px; text-transform:uppercase; padding-top:4px; font-style:normal;}
+  .t-copy h3{font-size:1.4rem; font-weight:500; margin-bottom:6px;}
+  .t-copy p{color:var(--blush-dim); font-size:0.95rem; line-height:1.6; font-style:normal;}
+
+  /* ---------- CTA / contact ---------- */
+  .cta-section{
+    text-align:center;
+    background:
+      linear-gradient(180deg, rgba(36,21,33,0.75), rgba(36,21,33,0.9)),
+      url('https://picsum.photos/seed/ivyoak9/1600/700') center/cover;
+  }
+  .cta-section h2{font-size:clamp(2rem,5vw,3.4rem); font-weight:500; max-width:700px; margin:0 auto 20px;}
+  .cta-section p{color:var(--blush-dim); max-width:520px; margin:0 auto 36px; line-height:1.7; font-style:normal;}
+
+  footer{padding:36px 6%; text-align:center; border-top:1px solid var(--line); color:var(--blush-dim); font-size:0.8rem; letter-spacing:0.5px; font-style:normal;}
+  footer span{color:var(--champagne);}
+
+  .float-wa{
+    position:fixed; bottom:26px; right:26px; z-index:60;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4); transition:transform .25s;
+  }
+  .float-wa:hover{transform:scale(1.08);}
+
+  @media (max-width:900px){
+    nav ul{display:none;}
+    .nav-toggle{display:flex;}
+    .gallery{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;}
+    .about{grid-template-columns:1fr;}
+    .t-row{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important; scroll-behavior:auto !important;} }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="logo">IVY <span>&amp;</span> OAK</div>
+  <nav>
+    <ul>
+      <li><a href="#gallery">Portfolio</a></li>
+      <li><a href="#timeline">The Day</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Enquire</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Engagement &amp; Ring Ceremony Photography</div>
+    <h1>The quiet <em>"yes"</em> before<br>the big celebration</h1>
+    <p>Ring ceremonies, roka, and engagement shoots — captured with soft light and a lot of patience for the small, unplanned moments.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-solid">Enquire Now</a>
+      <a href="#gallery" class="btn btn-outline">View Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-head">
+    <span class="eyebrow">Selected Work</span>
+    <h2>A few frames, chosen carefully</h2>
+    <p>This is a small, curated set — full galleries are shared privately with each couple.</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ring">Ring Ceremony</button>
+    <button class="filter-btn" data-filter="roka">Roka</button>
+    <button class="filter-btn" data-filter="couple">Couple Shoot</button>
+    <button class="filter-btn" data-filter="family">Family</button>
+    <button class="filter-btn" data-filter="film">Films</button>
+  </div>
+
+  <div class="gallery ring-edge" id="galleryGrid">
+    <div class="g-item wide" data-cat="ring"><img src="https://picsum.photos/seed/ie1/800/500" alt=""><div class="g-tag">Ring Exchange</div></div>
+    <div class="g-item" data-cat="couple"><img src="https://picsum.photos/seed/ie2/500/500" alt=""><div class="g-tag">Couple Portrait</div></div>
+    <div class="g-item tall" data-cat="couple"><img src="https://picsum.photos/seed/ie3/500/900" alt=""><div class="g-tag">Golden Hour Shoot</div></div>
+    <div class="g-item g-video tall" data-cat="film" data-video="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+      <video muted loop playsinline poster="https://picsum.photos/seed/iev1/500/900"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"></video>
+      <div class="play-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="#f3e4e6"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="video-tag-icon">▶ Video</div>
+      <div class="g-tag">Engagement Highlight Reel</div>
+    </div>
+    <div class="g-item" data-cat="roka"><img src="https://picsum.photos/seed/ie4/500/500" alt=""><div class="g-tag">Roka Ceremony</div></div>
+    <div class="g-item" data-cat="family"><img src="https://picsum.photos/seed/ie5/500/500" alt=""><div class="g-tag">Family Blessing</div></div>
+    <div class="g-item wide" data-cat="roka"><img src="https://picsum.photos/seed/ie6/800/500" alt=""><div class="g-tag">Roka · Sweets &amp; Rituals</div></div>
+    <div class="g-item" data-cat="family"><img src="https://picsum.photos/seed/ie7/500/500" alt=""><div class="g-tag">Family Portrait</div></div>
+    <div class="g-item g-video" data-cat="film" data-video="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+      <video muted loop playsinline poster="https://picsum.photos/seed/iev2/500/500"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"></video>
+      <div class="play-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="#f3e4e6"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="video-tag-icon">▶ Video</div>
+      <div class="g-tag">Ring Exchange Teaser</div>
+    </div>
+    <div class="g-item" data-cat="ring"><img src="https://picsum.photos/seed/ie8/500/500" alt=""><div class="g-tag">Ring Ceremony</div></div>
+    <div class="g-item g-external" data-cat="film" data-link="https://www.youtube.com/@yourchannelname" data-platform="YouTube">
+      <img src="https://picsum.photos/seed/ieyt1/500/500" alt="">
+      <div class="ext-badge youtube">▶ YouTube</div>
+      <div class="play-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f3e4e6"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="g-tag">Full Engagement Film — Watch on YouTube</div>
+    </div>
+    <div class="g-item g-external" data-cat="film" data-link="https://www.instagram.com/reel/yourreelid/" data-platform="Instagram">
+      <img src="https://picsum.photos/seed/ieig1/500/500" alt="">
+      <div class="ext-badge instagram">◎ Instagram</div>
+      <div class="play-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f3e4e6"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="g-tag">Couple Reel — Watch on Instagram</div>
+    </div>
+  </div>
+
+  <p class="gallery-note">Liked what you see? <a href="#contact">Get in touch on WhatsApp</a> to see the full portfolio.<br>
+  <span style="font-size:0.8rem; opacity:0.7;">Short clips play right here · full films &amp; extra reels open on YouTube / Instagram</span></p>
+</section>
+
+<!-- FILM REEL STRIP -->
+<section id="films" style="padding-top:0;">
+  <div class="section-head">
+    <span class="eyebrow">Motion</span>
+    <h2>Engagement Films & Reels</h2>
+    <p>Short highlight videos from recent ceremonies — scroll sideways to browse.</p>
+  </div>
+  <div class="reel-strip">
+    <div class="reel-card" data-video="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+      <video muted loop playsinline poster="https://picsum.photos/seed/ireel1/300/500"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"></video>
+      <div class="reel-label">Meera &amp; Arjun — Ring Ceremony</div>
+    </div>
+    <div class="reel-card" data-video="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+      <video muted loop playsinline poster="https://picsum.photos/seed/ireel2/300/500"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"></video>
+      <div class="reel-label">Roka — Deshmukh Family</div>
+    </div>
+    <div class="reel-card" data-video="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+      <video muted loop playsinline poster="https://picsum.photos/seed/ireel3/300/500"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"></video>
+      <div class="reel-label">Couple Shoot — Lavasa</div>
+    </div>
+    <div class="reel-card" data-video="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+      <video muted loop playsinline poster="https://picsum.photos/seed/ireel4/300/500"><source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"></video>
+      <div class="reel-label">Sunset Proposal Film</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img id="lightboxImg" src="" alt="Full view">
+  <video id="lightboxVideo" controls autoplay style="display:none; max-height:88vh; max-width:88vw;"></video>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img ring-edge">
+    <img src="https://picsum.photos/seed/ivyoakabout/700/850" alt="Photographer at work">
+  </div>
+  <div class="about-copy">
+    <span class="eyebrow">Behind the Camera</span>
+    <h2 class="serif" style="font-size:2.2rem; margin-bottom:18px;">Naina Deshpande</h2>
+    <p>Shooting engagements, roka, and ring ceremonies across Pune and nearby areas — the quieter cousin of the big wedding, told with the same care.</p>
+    <p>Every couple gets a private gallery after the shoot, delivered safely — no compression, no losing detail in a forward chain.</p>
+    <div class="stat-row">
+      <div class="stat"><h3>120+</h3><span>Ceremonies Shot</span></div>
+      <div class="stat"><h3>4.9★</h3><span>Client Rating</span></div>
+      <div class="stat"><h3>48 hr</h3><span>Gallery Delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-head">
+    <span class="eyebrow">How It Flows</span>
+    <h2>A typical engagement day</h2>
+    <p>Every family does it a little differently — here's the shape most days take.</p>
+  </div>
+  <div class="timeline">
+    <div class="t-row">
+      <div class="t-time">Morning</div>
+      <div class="t-copy"><h3>Getting Ready</h3><p>Candid frames while both families get dressed — the small, unposed details.</p></div>
+    </div>
+    <div class="t-row">
+      <div class="t-time">Midday</div>
+      <div class="t-copy"><h3>Ring Exchange</h3><p>The main ceremony — rings, blessings, and the first reactions from both sides.</p></div>
+    </div>
+    <div class="t-row">
+      <div class="t-time">Afternoon</div>
+      <div class="t-copy"><h3>Family Portraits</h3><p>Organised group shots so nobody's left out of the frame.</p></div>
+    </div>
+    <div class="t-row">
+      <div class="t-time">Evening</div>
+      <div class="t-copy"><h3>Couple Shoot</h3><p>A short walk away from the crowd for a few quiet, golden-hour portraits.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <span class="eyebrow">Let's Talk</span>
+  <h2>Have an engagement coming up?</h2>
+  <p>Send your date, location, and what you're celebrating — I'll get back to you within a day with availability and packages.</p>
+  <a href="https://wa.me/910000000000?text=Hi%2C%20I%20want%20to%20enquire%20about%20an%20engagement%20photography%20booking" class="btn btn-solid" target="_blank" rel="noopener">Message on WhatsApp</a>
+</section>
+
+<footer>
+  © 2026 Ivy &amp; Oak · Built for demo purposes · <span>Pune, Maharashtra</span>
+</footer>
+
+<a href="https://wa.me/910000000000" class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.2 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.6 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.8.9-3.2-.2-.3C4 14.6 3.6 13.3 3.6 12c0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4-3.8 8.4-8.4 8.4z"/></svg>
+</a>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.g-item');
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      items.forEach(item=>{
+        item.style.display = (f==='all' || item.dataset.cat===f) ? '' : 'none';
+      });
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxVideo = document.getElementById('lightboxVideo');
+
+  function closeLightbox(){
+    lightbox.classList.remove('active');
+    lightboxVideo.pause();
+    lightboxVideo.src = '';
+    lightboxVideo.style.display = 'none';
+    lightboxImg.style.display = '';
+  }
+
+  document.querySelectorAll('.g-item:not(.g-video) img').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      lightboxImg.src = img.src.replace('/500/','/1200/').replace('/800/','/1400/');
+      lightboxImg.style.display = '';
+      lightboxVideo.style.display = 'none';
+      lightbox.classList.add('active');
+    });
+  });
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) closeLightbox(); });
+
+  document.querySelectorAll('.g-item.g-video').forEach(card=>{
+    const vid = card.querySelector('video');
+    card.addEventListener('mouseenter', ()=> vid.play().catch(()=>{}));
+    card.addEventListener('mouseleave', ()=> { vid.pause(); vid.currentTime = 0; });
+    card.addEventListener('click', ()=>{
+      lightboxVideo.src = card.dataset.video;
+      lightboxVideo.style.display = '';
+      lightboxImg.style.display = 'none';
+      lightbox.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.g-item.g-external').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      window.open(card.dataset.link, '_blank', 'noopener');
+    });
+  });
+
+  document.querySelectorAll('.reel-card').forEach(card=>{
+    const vid = card.querySelector('video');
+    card.addEventListener('mouseenter', ()=> vid.play().catch(()=>{}));
+    card.addEventListener('mouseleave', ()=> { vid.pause(); vid.currentTime = 0; });
+    card.addEventListener('click', ()=>{
+      lightboxVideo.src = card.dataset.video;
+      lightboxVideo.style.display = '';
+      lightboxImg.style.display = 'none';
+      lightbox.classList.add('active');
+    });
+  });
+
+  window.addEventListener('scroll', ()=>{
+    const h = document.getElementById('siteHeader');
+    h.style.background = window.scrollY > 60
+      ? 'rgba(36,21,33,0.95)'
+      : 'linear-gradient(180deg, rgba(36,21,33,0.92), rgba(36,21,33,0))';
+  });
+</script>
+
+</body>
+</html>
